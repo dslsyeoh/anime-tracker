@@ -1,5 +1,7 @@
 package com.dsl.anime.tracker.entity;
 
+import com.dsl.anime.tracker.constraints.Anime;
+import com.dsl.anime.tracker.validations.CreateValidation;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -7,9 +9,10 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
-@Entity
-@Table
 @Data
+@Entity
+@Anime(groups = CreateValidation.class)
+@Table(name = "anime")
 public class AnimeEntity
 {
     @Id
@@ -43,3 +46,4 @@ public class AnimeEntity
     @Column(nullable = false)
     private boolean onAir;
 }
+
