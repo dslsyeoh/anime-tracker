@@ -2,11 +2,9 @@ package com.dsl.anime.tracker.rest.utils;
 
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.net.URI;
-
-public final class Builder
+public final class UrlBuilder
 {
-    private Builder() {}
+    private UrlBuilder() {}
 
     public static <T> String build(String url, T id)
     {
