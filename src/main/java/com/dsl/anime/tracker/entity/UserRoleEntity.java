@@ -7,9 +7,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity
-@Table
 @Data
+@Entity
+@Table(name = "userRole")
 public class UserRoleEntity
 {
     @Id
