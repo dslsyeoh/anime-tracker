@@ -2,7 +2,7 @@ package com.dsl.anime.tracker.rest.managers;
 
 import com.dsl.anime.tracker.rest.client.RestClient;
 import com.dsl.anime.tracker.rest.dto.AnimeDetails;
-import com.dsl.anime.tracker.rest.utils.Builder;
+import com.dsl.anime.tracker.rest.utils.UrlBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -23,7 +23,7 @@ public class AnimeManager
 
     public AnimeDetails search(Long id)
     {
-        String url = Builder.build(BASE_URL, id);
+        String url = UrlBuilder.build(BASE_URL, id);
         return restClient.getObject(url, AnimeDetails.class);
     }
 
@@ -39,7 +39,7 @@ public class AnimeManager
 
     public void delete(Long id)
     {
-        String url = Builder.build(BASE_URL, id);
+        String url = UrlBuilder.build(BASE_URL, id);
         restClient.deleteObject(url, AnimeDetails.class);
     }
 }
