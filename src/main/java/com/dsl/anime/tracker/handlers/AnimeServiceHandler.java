@@ -1,16 +1,21 @@
 package com.dsl.anime.tracker.handlers;
 
 import com.dsl.anime.tracker.entity.AnimeEntity;
+import com.dsl.anime.tracker.exceptions.BadRequestException;
 import com.dsl.anime.tracker.exceptions.NotFoundException;
 import com.dsl.anime.tracker.mapper.AbstractMapper;
 import com.dsl.anime.tracker.repository.AnimeRepository;
 import com.dsl.anime.tracker.rest.dto.AnimeDetails;
 import com.dsl.anime.tracker.services.AnimeService;
+import com.dsl.anime.tracker.validations.CreateValidation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.validation.ConstraintViolation;
+import javax.validation.Validator;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -18,6 +23,9 @@ public class AnimeServiceHandler extends AbstractMapper implements AnimeService
 {
     @Autowired
     private AnimeRepository animeRepository;
+
+    @Autowired
+    private Validator validator;
 
     public List<AnimeDetails> list()
     {
@@ -35,8 +43,10 @@ public class AnimeServiceHandler extends AbstractMapper implements AnimeService
     public AnimeDetails create(AnimeDetails animeDetails)
     {
         AnimeEntity entity = toEntity(animeDetails);
-        AnimeEntity created = animeRepository.save(entity);
+        Set<ConstraintViolation<AnimeEntity>> errors = validator.validate(entity, CreateValidation.class);
+        if(!errors.isEmpty()) throw new BadRequestException();
 
+        AnimeEntity created = animeRepository.save(entity);
         return toMap(created, AnimeDetails.class);
     }
 
