@@ -12,7 +12,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Anime
 {
-    String message() default "testing";
+    String message() default "anime.name.existed";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }
