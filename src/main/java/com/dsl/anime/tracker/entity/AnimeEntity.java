@@ -1,10 +1,10 @@
 package com.dsl.anime.tracker.entity;
 
-import com.dsl.anime.tracker.mapper.AbstractMapper;
-import com.dsl.anime.tracker.rest.dto.AnimeDetails;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
 @Entity
@@ -16,6 +16,7 @@ public class AnimeEntity
     @GeneratedValue
     private Long id;
 
+    @NotBlank
     @Column(nullable = false)
     private String name;
 
@@ -24,12 +25,15 @@ public class AnimeEntity
 
     private Date nextRenewDate;
 
+    @Min(value = 1)
     @Column(nullable = false)
     private int renewDays;
 
+    @Min(value = 1)
     @Column(nullable = false)
     private int currentEpisode;
 
+    @Min(value = 1)
     @Column(nullable = false)
     private int rating;
 
