@@ -4,9 +4,11 @@ import com.dsl.anime.tracker.rest.dto.UserDetails;
 import com.dsl.anime.tracker.services.UserService;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
+@Transactional
 public class UserServiceHandler implements UserService
 {
     public List<UserDetails> list()

@@ -8,9 +8,11 @@ import com.dsl.anime.tracker.repository.AnimeRepository;
 import com.dsl.anime.tracker.rest.dto.AnimeDetails;
 import com.dsl.anime.tracker.services.AnimeService;
 import com.dsl.anime.tracker.validations.CreateValidation;
+import com.dsl.anime.tracker.validations.UpdateValidation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 import java.util.Collections;
@@ -19,6 +21,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
+@Transactional
 public class AnimeServiceHandler extends AbstractMapper implements AnimeService
 {
     @Autowired

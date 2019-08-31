@@ -4,9 +4,11 @@ import com.dsl.anime.tracker.rest.dto.UserPendingDetails;
 import com.dsl.anime.tracker.services.UserPendingService;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
+@Transactional
 public class UserPendingServiceHandler implements UserPendingService
 {
     public List<UserPendingDetails> list()
