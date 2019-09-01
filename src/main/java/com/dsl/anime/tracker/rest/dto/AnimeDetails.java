@@ -1,11 +1,14 @@
 package com.dsl.anime.tracker.rest.dto;
 
-import com.dsl.anime.tracker.mapper.AbstractMapper;
+import com.dsl.anime.tracker.constraints.Anime;
+import com.dsl.anime.tracker.validations.CreateValidation;
+import com.dsl.anime.tracker.validations.UpdateValidation;
 import lombok.Data;
 
 import java.util.Date;
 
 @Data
+@Anime(groups = {CreateValidation.class, UpdateValidation.class})
 public class AnimeDetails
 {
     private Long id;
