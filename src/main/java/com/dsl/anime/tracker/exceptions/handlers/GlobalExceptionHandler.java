@@ -1,3 +1,8 @@
+/*
+ * Author Steven Yeoh
+ * Copyright (c) 2019. All rights reserved
+ */
+
 package com.dsl.anime.tracker.exceptions.handlers;
 
 import com.dsl.anime.tracker.exceptions.BadRequestException;
