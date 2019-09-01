@@ -46,7 +46,7 @@ public class AnimeServiceHandler extends AbstractMapper implements AnimeService
     public AnimeDetails create(AnimeDetails animeDetails)
     {
         Set<ConstraintViolation<AnimeDetails>> errors = validator.validate(animeDetails, CreateValidation.class);
-        if(!errors.isEmpty()) throw new BadRequestException();
+        if(!errors.isEmpty()) throw new BadRequestException(errors);
         AnimeEntity entity = toEntity(animeDetails);
 
         AnimeEntity created = animeRepository.save(entity);
@@ -57,7 +57,7 @@ public class AnimeServiceHandler extends AbstractMapper implements AnimeService
     {
         AnimeEntity entity = animeRepository.findById(animeDetails.getId()).orElseThrow(NotFoundException::new);
         Set<ConstraintViolation<AnimeDetails>> errors = validator.validate(animeDetails, UpdateValidation.class);
-        if(!errors.isEmpty()) throw new BadRequestException();
+        if(!errors.isEmpty()) throw new BadRequestException(errors);
         AnimeEntity toBeUpdated = toEntity(animeDetails, entity);
 
         AnimeEntity updated = animeRepository.save(toBeUpdated);
