@@ -19,12 +19,23 @@ public class AnimeValidator implements ConstraintValidator<Anime, AnimeDetails>
     @Override
     public boolean isValid(AnimeDetails animeDetails, ConstraintValidatorContext constraintValidatorContext)
     {
+        boolean isValid;
         if(Objects.nonNull(animeDetails.getId()))
         {
             Optional<AnimeEntity> entity = animeRepository.findByName(animeDetails.getName());
-            return !entity.isPresent() || Objects.equals(entity.get().getId(), animeDetails.getId());
+            isValid = !entity.isPresent() || Objects.equals(entity.get().getId(), animeDetails.getId());
+        }
+        else
+        {
+            isValid = !animeRepository.findByName(animeDetails.getName()).isPresent();
         }
 
-        return !animeRepository.findByName(animeDetails.getName()).isPresent();
+        if(!isValid)
+        {
+            constraintValidatorContext.disableDefaultConstraintViolation();
+            constraintValidatorContext.buildConstraintViolationWithTemplate(constraintValidatorContext.getDefaultConstraintMessageTemplate()).addPropertyNode("name").addConstraintViolation();
+            return false;
+        }
+        return true;
     }
 }
