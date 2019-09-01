@@ -2,6 +2,7 @@ package com.dsl.anime.tracker.entity;
 
 import com.dsl.anime.tracker.constraints.Anime;
 import com.dsl.anime.tracker.validations.CreateValidation;
+import com.dsl.anime.tracker.validations.UpdateValidation;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -11,7 +12,6 @@ import java.util.Date;
 
 @Data
 @Entity
-@Anime(groups = CreateValidation.class)
 @Table(name = "anime")
 public class AnimeEntity
 {
