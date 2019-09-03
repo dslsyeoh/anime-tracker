@@ -25,7 +25,7 @@ public class GlobalExceptionHandler
                 .map(error -> {
                     Violation violation = new Violation();
                     violation.setField(error.getField());
-                    violation.setErrors(error.getErrors());
+                    violation.setError(error.getError());
                     return violation;
                 })
                 .collect(Collectors.toList());
