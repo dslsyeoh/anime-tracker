@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 @ResponseStatus(HttpStatus.NOT_FOUND)
 public class BadRequestException extends RuntimeException
 {
-    private List<Violation> errors ;
+    private List<Violation> errors;
 
     public <T> BadRequestException(Set<ConstraintViolation<T>> constraintViolations)
     {
@@ -24,7 +24,7 @@ public class BadRequestException extends RuntimeException
         errors = constraintViolations.stream().map(constraintViolation -> {
             Violation violation = new Violation();
             violation.setField(constraintViolation.getPropertyPath().toString());
-            violation.setErrors(Collections.singletonList(constraintViolation.getMessage()));
+            violation.setError(constraintViolation.getMessage());
             return violation;
         }).collect(Collectors.toList());
     }

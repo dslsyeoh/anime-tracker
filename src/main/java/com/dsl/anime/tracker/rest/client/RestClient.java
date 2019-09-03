@@ -76,7 +76,7 @@ public class RestClient
         {
             case BAD_REQUEST:
                 List<Violation> violations = convert(e.getResponseBodyAsString());
-                violations.forEach(violation -> System.out.println("field=" + violation.getField() + " errors=" + violation.getErrors()));
+                violations.forEach(violation -> System.out.println("field=" + violation.getField() + " errors=" + violation.getError()));
                 break;
             case NOT_FOUND:
                 System.out.println("Handled not found exception");
