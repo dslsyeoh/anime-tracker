@@ -5,19 +5,19 @@
 
 package com.dsl.anime.tracker.services;
 
-import com.dsl.anime.tracker.rest.dto.UserHistoryDetails;
+import com.dsl.anime.tracker.rest.dto.UserHistory;
 
 import java.util.List;
 
 public interface UserHistoryService
 {
-    List<UserHistoryDetails> list();
+    List<UserHistory> list();
 
-    List<UserHistoryDetails> search(Long id);
+    List<UserHistory> search(Long id);
 
-    void create(UserHistoryDetails userHistoryDetails);
+    void create(UserHistory userHistory);
 
-    void update(UserHistoryDetails userHistoryDetails);
+    void update(UserHistory userHistory);
 
     void delete(Long id);
 }

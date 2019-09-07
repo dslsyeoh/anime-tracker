@@ -5,7 +5,7 @@
 
 package com.dsl.anime.tracker.handlers;
 
-import com.dsl.anime.tracker.rest.dto.UserHistoryDetails;
+import com.dsl.anime.tracker.rest.dto.UserHistory;
 import com.dsl.anime.tracker.services.UserHistoryService;
 import org.springframework.stereotype.Service;
 
@@ -16,22 +16,22 @@ import java.util.List;
 @Transactional
 public class UserHistoryServiceServiceHandler implements UserHistoryService
 {
-    public List<UserHistoryDetails> list()
+    public List<UserHistory> list()
     {
         return null;
     }
 
-    public List<UserHistoryDetails> search(Long id)
+    public List<UserHistory> search(Long id)
     {
         return null;
     }
 
-    public void create(UserHistoryDetails userHistoryDetails)
+    public void create(UserHistory userHistory)
     {
 
     }
 
-    public void update(UserHistoryDetails userHistoryDetails)
+    public void update(UserHistory userHistory)
     {
 
     }
