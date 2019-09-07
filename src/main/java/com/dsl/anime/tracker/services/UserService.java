@@ -5,17 +5,17 @@
 
 package com.dsl.anime.tracker.services;
 
-import com.dsl.anime.tracker.rest.dto.UserDetails;
+import com.dsl.anime.tracker.rest.dto.User;
 
 import java.util.List;
 
 public interface UserService
 {
-    List<UserDetails> list();
+    List<User> list();
 
-    void create(UserDetails userDetails);
+    User create(User user);
 
-    void update(UserDetails userDetails);
+    User update(User user);
 
     void delete(Long id);
 }
