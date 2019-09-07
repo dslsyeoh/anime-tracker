@@ -8,6 +8,7 @@ package com.dsl.anime.tracker.rest.dto;
 import com.dsl.anime.tracker.constraints.Password;
 import com.dsl.anime.tracker.validations.CreateValidation;
 import com.dsl.anime.tracker.validations.UpdateValidation;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
@@ -19,14 +20,14 @@ public class User
 {
     private Long id;
 
-    @NotBlank
+    @NotBlank(groups = {CreateValidation.class, UpdateValidation.class})
     private String username;
 
     @NotBlank
-    @Size(min = 8)
+    @Size(min = 8, groups = {CreateValidation.class, UpdateValidation.class})
     private String password;
 
     @NotBlank
-    @Size(min = 8)
+    @Size(min = 8, groups = {CreateValidation.class, UpdateValidation.class})
     private String confirmPassword;
 }
