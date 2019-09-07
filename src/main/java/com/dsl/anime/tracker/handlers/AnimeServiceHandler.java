@@ -40,9 +40,7 @@ public class AnimeServiceHandler implements AnimeService
 
     public List<Anime> list()
     {
-        List<AnimeEntity> entities = animeRepository.findAll();
-        if(entities.isEmpty()) return Collections.emptyList();
-        return entities.stream().map(animeMapper::convert).collect(Collectors.toList());
+        return animeRepository.findAll().stream().map(animeMapper::convert).collect(Collectors.toList());
     }
 
     public Anime search(Long id)
