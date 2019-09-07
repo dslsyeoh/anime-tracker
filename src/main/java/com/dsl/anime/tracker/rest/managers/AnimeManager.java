@@ -6,7 +6,7 @@
 package com.dsl.anime.tracker.rest.managers;
 
 import com.dsl.anime.tracker.rest.client.RestClient;
-import com.dsl.anime.tracker.rest.dto.AnimeDetails;
+import com.dsl.anime.tracker.rest.dto.Anime;
 import com.dsl.anime.tracker.rest.utils.UrlBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -21,30 +21,30 @@ public class AnimeManager
 
     private static final String BASE_URL = "api/anime";
 
-    public List<AnimeDetails> list()
+    public List<Anime> list()
     {
-        return restClient.getObjects(BASE_URL, AnimeDetails[].class);
+        return restClient.getObjects(BASE_URL, Anime[].class);
     }
 
-    public AnimeDetails search(Long id)
+    public Anime search(Long id)
     {
         String url = UrlBuilder.build(BASE_URL, id);
-        return restClient.getObject(url, AnimeDetails.class);
+        return restClient.getObject(url, Anime.class);
     }
 
-    public AnimeDetails create(AnimeDetails animeDetails)
+    public Anime create(Anime anime)
     {
-        return restClient.postObject(BASE_URL, animeDetails, AnimeDetails.class);
+        return restClient.postObject(BASE_URL, anime, Anime.class);
     }
 
-    public AnimeDetails update(AnimeDetails animeDetails)
+    public Anime update(Anime anime)
     {
-        return restClient.putObject(BASE_URL, animeDetails, AnimeDetails.class);
+        return restClient.putObject(BASE_URL, anime, Anime.class);
     }
 
     public void delete(Long id)
     {
         String url = UrlBuilder.build(BASE_URL, id);
-        restClient.deleteObject(url, AnimeDetails.class);
+        restClient.deleteObject(url, Anime.class);
     }
 }

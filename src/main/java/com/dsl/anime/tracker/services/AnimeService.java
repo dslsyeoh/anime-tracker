@@ -5,19 +5,19 @@
 
 package com.dsl.anime.tracker.services;
 
-import com.dsl.anime.tracker.rest.dto.AnimeDetails;
+import com.dsl.anime.tracker.rest.dto.Anime;
 
 import java.util.List;
 
 public interface AnimeService
 {
-    List<AnimeDetails> list();
+    List<Anime> list();
 
-    AnimeDetails search(Long id);
+    Anime search(Long id);
 
-    AnimeDetails create(AnimeDetails animeDetails);
+    Anime create(Anime anime);
 
-    AnimeDetails update(AnimeDetails animeDetails);
+    Anime update(Anime anime);
 
     void delete(Long id);
 }

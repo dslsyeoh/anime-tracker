@@ -8,9 +8,9 @@ package com.dsl.anime.tracker.handlers;
 import com.dsl.anime.tracker.entity.AnimeEntity;
 import com.dsl.anime.tracker.exceptions.BadRequestException;
 import com.dsl.anime.tracker.exceptions.NotFoundException;
-import com.dsl.anime.tracker.mapper.AbstractMapper;
+import com.dsl.anime.tracker.mapper.AnimeMapper;
 import com.dsl.anime.tracker.repository.AnimeRepository;
-import com.dsl.anime.tracker.rest.dto.AnimeDetails;
+import com.dsl.anime.tracker.rest.dto.Anime;
 import com.dsl.anime.tracker.services.AnimeService;
 import com.dsl.anime.tracker.validations.CreateValidation;
 import com.dsl.anime.tracker.validations.UpdateValidation;
@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
 
 @Service
 @Transactional
-public class AnimeServiceHandler extends AbstractMapper implements AnimeService
+public class AnimeServiceHandler implements AnimeService
 {
     @Autowired
     private AnimeRepository animeRepository;
@@ -35,63 +35,47 @@ public class AnimeServiceHandler extends AbstractMapper implements AnimeService
     @Autowired
     private Validator validator;
 
-    public List<AnimeDetails> list()
+    @Autowired
+    private AnimeMapper animeMapper;
+
+    public List<Anime> list()
     {
         List<AnimeEntity> entities = animeRepository.findAll();
         if(entities.isEmpty()) return Collections.emptyList();
-        return entities.stream().map(entity -> toMap(entity, AnimeDetails.class)).collect(Collectors.toList());
+        return entities.stream().map(animeMapper::convert).collect(Collectors.toList());
     }
 
-    public AnimeDetails search(Long id)
+    public Anime search(Long id)
     {
         AnimeEntity entity = animeRepository.findById(id).orElseThrow(NotFoundException::new);
-        return toMap(entity, AnimeDetails.class);
+        return animeMapper.convert(entity);
     }
 
-    public AnimeDetails create(AnimeDetails animeDetails)
+    public Anime create(Anime anime)
     {
-        Set<ConstraintViolation<AnimeDetails>> errors = validator.validate(animeDetails, CreateValidation.class);
+        Set<ConstraintViolation<Anime>> errors = validator.validate(anime, CreateValidation.class);
         if(!errors.isEmpty()) throw new BadRequestException(errors);
-        AnimeEntity entity = toEntity(animeDetails);
+        AnimeEntity entity = animeMapper.toEntity(anime);
 
         AnimeEntity created = animeRepository.save(entity);
-        return toMap(created, AnimeDetails.class);
+        return animeMapper.convert(created);
     }
 
-    public AnimeDetails update(AnimeDetails animeDetails)
+    public Anime update(Anime anime)
     {
-        AnimeEntity entity = animeRepository.findById(animeDetails.getId()).orElseThrow(NotFoundException::new);
-        Set<ConstraintViolation<AnimeDetails>> errors = validator.validate(animeDetails, UpdateValidation.class);
+        if(!animeRepository.existsById(anime.getId())) throw new NotFoundException();
+        Set<ConstraintViolation<Anime>> errors = validator.validate(anime, UpdateValidation.class);
         if(!errors.isEmpty()) throw new BadRequestException(errors);
-        AnimeEntity toBeUpdated = toEntity(animeDetails, entity);
+        AnimeEntity toBeUpdated = animeMapper.toEntity(anime);
 
         AnimeEntity updated = animeRepository.save(toBeUpdated);
 
-        return toMap(updated, AnimeDetails.class);
+        return animeMapper.convert(updated);
     }
 
     public void delete(Long id)
     {
         AnimeEntity toBeDeleted = animeRepository.findById(id).orElseThrow(NotFoundException::new);
         animeRepository.delete(toBeDeleted);
-    }
-
-    private AnimeEntity toEntity(AnimeDetails animeDetails)
-    {
-        return toEntity(animeDetails, new AnimeEntity());
-    }
-
-    private AnimeEntity toEntity(AnimeDetails animeDetails, AnimeEntity entity)
-    {
-        entity.setName(animeDetails.getName());
-        entity.setOnAir(animeDetails.isOnAir());
-        entity.setRating(animeDetails.getRating());
-        entity.setSummary(animeDetails.getSummary());
-        entity.setRenewDays(animeDetails.getRenewDays());
-        entity.setReleaseDate(animeDetails.getReleaseDate());
-        entity.setNextRenewDate(animeDetails.getNextRenewDate());
-        entity.setCurrentEpisode(animeDetails.getCurrentEpisode());
-
-        return entity;
     }
 }

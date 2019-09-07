@@ -5,7 +5,7 @@
 
 package com.dsl.anime.tracker.rest.controllers;
 
-import com.dsl.anime.tracker.rest.dto.AnimeDetails;
+import com.dsl.anime.tracker.rest.dto.Anime;
 import com.dsl.anime.tracker.services.AnimeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -20,22 +20,22 @@ public class AnimeController
     private AnimeService animeService;
 
     @GetMapping
-    private List<AnimeDetails> list()
+    private List<Anime> list()
     {
         return animeService.list();
     }
 
     @GetMapping("/{id}")
-    private AnimeDetails search(@PathVariable Long id) { return animeService.search(id); }
+    private Anime search(@PathVariable Long id) { return animeService.search(id); }
 
     @PostMapping
-    private AnimeDetails create(@RequestBody AnimeDetails animeDetails)
+    private Anime create(@RequestBody Anime anime)
     {
-        return animeService.create(animeDetails);
+        return animeService.create(anime);
     }
 
     @PutMapping
-    private AnimeDetails update(@RequestBody AnimeDetails animeDetails) { return animeService.update(animeDetails); }
+    private Anime update(@RequestBody Anime anime) { return animeService.update(anime); }
 
     @DeleteMapping("/{id}")
     private void delete(@PathVariable Long id) { animeService.delete(id); }
