@@ -21,7 +21,6 @@ public class AnimeEntity
     @GeneratedValue
     private Long id;
 
-    @NotBlank
     @Column(nullable = false)
     private String name;
 
@@ -30,15 +29,12 @@ public class AnimeEntity
 
     private Date nextRenewDate;
 
-    @Min(value = 1)
     @Column(nullable = false)
     private int renewDays;
 
-    @Min(value = 1)
     @Column(nullable = false)
     private int currentEpisode;
 
-    @Min(value = 1)
     @Column(nullable = false)
     private int rating;
 
@@ -47,5 +43,8 @@ public class AnimeEntity
 
     @Column(nullable = false)
     private boolean onAir;
+
+    @OneToOne(mappedBy = "anime")
+    private UserHistoryEntity userHistory;
 }
 
