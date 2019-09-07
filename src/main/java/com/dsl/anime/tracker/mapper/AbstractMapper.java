@@ -8,13 +8,15 @@ package com.dsl.anime.tracker.mapper;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public abstract class AbstractMapper
+public abstract class AbstractMapper<E, T>
 {
     @Autowired
     private ObjectMapper objectMapper;
 
-    public <S, T> T toMap(S obj, Class<T> type)
+    E toEntity(T object, Class<E> clazz)
     {
-        return objectMapper.convertValue(obj, type);
+        return objectMapper.convertValue(object, clazz);
     }
+
+    public abstract T convert(E entity);
 }
