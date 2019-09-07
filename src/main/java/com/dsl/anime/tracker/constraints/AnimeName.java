@@ -5,19 +5,21 @@
 
 package com.dsl.anime.tracker.constraints;
 
-import com.dsl.anime.tracker.validators.AnimeValidator;
+import com.dsl.anime.tracker.validators.AnimeNameValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
 import java.lang.annotation.*;
 
 @Documented
-@Constraint(validatedBy = AnimeValidator.class)
+@Constraint(validatedBy = AnimeNameValidator.class)
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Anime
+public @interface AnimeName
 {
     String message() default "anime.name.existed";
+
     Class<?>[] groups() default {};
+
     Class<? extends Payload>[] payload() default {};
 }
