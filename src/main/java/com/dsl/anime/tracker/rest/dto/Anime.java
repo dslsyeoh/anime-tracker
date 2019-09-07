@@ -20,28 +20,29 @@ public class Anime
 {
     private Long id;
 
-    @NotBlank
+    @NotBlank(groups = {CreateValidation.class, UpdateValidation.class})
     private String name;
 
-    @NotBlank
+    @NotBlank(groups = {CreateValidation.class, UpdateValidation.class})
     private Date releaseDate;
 
-    @NotBlank
+    @NotBlank(groups = {CreateValidation.class, UpdateValidation.class})
     private Date nextRenewDate;
 
-    @Min(1)
-    @NotBlank
+    @Min(value = 1, groups = {CreateValidation.class, UpdateValidation.class})
+    @NotBlank(groups = {CreateValidation.class, UpdateValidation.class})
     private int renewDays;
 
-    @Min(1)
-    @NotBlank
+    @Min(value = 1, groups = {CreateValidation.class, UpdateValidation.class})
+    @NotBlank(groups = {CreateValidation.class, UpdateValidation.class})
     private int currentEpisode;
 
-    @NotBlank
-    @Min(1)
+    @NotBlank(groups = {CreateValidation.class, UpdateValidation.class})
+    @Min(value = 1, groups = {CreateValidation.class, UpdateValidation.class})
     private int rating;
+
     private String summary;
 
-    @NotBlank
+    @NotBlank(groups = {CreateValidation.class, UpdateValidation.class})
     private boolean onAir;
 }
