@@ -28,6 +28,9 @@ public class UserEntity
     @Column
     private String password;
 
+    @Transient
+    private String confirmPassword;
+
     @OneToMany(mappedBy = "user")
     private List<UserHistoryEntity> userHistory;
 }
