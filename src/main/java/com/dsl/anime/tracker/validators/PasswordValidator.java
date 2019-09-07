@@ -6,17 +6,17 @@
 package com.dsl.anime.tracker.validators;
 
 import com.dsl.anime.tracker.constraints.Password;
-import com.dsl.anime.tracker.rest.dto.UserDetails;
+import com.dsl.anime.tracker.rest.dto.User;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.util.Objects;
 
-public class PasswordValidator implements ConstraintValidator<Password, UserDetails>
+public class PasswordValidator implements ConstraintValidator<Password, User>
 {
     @Override
-    public boolean isValid(UserDetails userDetails, ConstraintValidatorContext constraintValidatorContext)
+    public boolean isValid(User user, ConstraintValidatorContext constraintValidatorContext)
     {
-        return Objects.equals(userDetails.getPassword(), userDetails.getConfirmPassword());
+        return Objects.equals(user.getPassword(), user.getConfirmPassword());
     }
 }
